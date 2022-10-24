@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { ReactComponent as Menu } from '../assets/menu.svg'
 
@@ -8,7 +9,19 @@ export const Header = () => {
 
     return (
         <>
-            <MenuCnt active={active}></MenuCnt>
+            <MenuCnt active={active}>
+                <div className="profile-cnt">
+                    <div className='avatar-cnt'>
+                        A
+                    </div>
+                </div>
+                <div className="signup_cnt">
+                    <Link to="/signup">create account</Link>
+                </div>
+                <div className="signin-cnt">
+                    <Link to="/signin">sign in</Link>
+                </div>
+            </MenuCnt>
             {active ?
                 <Opasity onClick={() => setActive(false)}></Opasity>
             : ""}
@@ -25,7 +38,7 @@ export const Header = () => {
 const Wrapper = styled.div`
     width: 80px;
     height: 100vh;
-    background-color: #555555;
+    background-color: #212245;
     padding: 10px;
     .chanel-group {
         width: 60px;
@@ -62,10 +75,52 @@ const MenuCnt = styled.div`
     z-index: 10;
     width: 300px;
     height: 100vh;
-    background-color: #555555;
+    background-color: #212245;
     position: absolute;
     transition: 0.3s;
     left: ${({active}) => active ? "0px" : "-300px"};
+    display: flex;
+    flex-direction: column;
+    .signup_cnt {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding-left: 15px;
+        border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+    }
+    .signin-cnt {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding-left: 15px;
+        border-bottom: 1px solid gray;
+    }
+    .profile-cnt {
+        width: 100%;
+        height: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .avatar-cnt {
+            width: 60px;
+            height: 60px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 600;
+            background-color: green;
+            border-radius: 50%;
+        }
+    }
+    a {
+        color: white;
+        text-decoration: none;
+    }
 `
 
 const Opasity = styled.div`

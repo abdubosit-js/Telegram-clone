@@ -17,12 +17,19 @@ export const mainSlice = createSlice({
             state.messages = actions.payload
         });
 
-        builder.addCase(signup.fulfilled, (state, actions) => {
+        builder.addCase(signup.fulfilled, (state, action) => {
             
         })
 
-        builder.addCase(signin.fulfilled, (state, actions) => {
-
+        builder.addCase(signin.fulfilled, (state, action) => {
+            state.auth = true
+            state.username = action.payload.username
+            state.token = action.payload.token
+            
+            localStorage.setItem("token", action.payload.token)
+            localStorage.setItem("username", action.payload.username)
         })
     }
 })
+
+export default mainSlice.reducer

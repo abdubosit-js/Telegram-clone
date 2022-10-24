@@ -20,7 +20,7 @@ const Wrapper = styled.div`
     .chat {
         width: 100%;
         height: 80px;
-        background-color: #555555;
+        background-color: #212245;
         border-left: 2px solid gray;
         position: fixed;
         bottom: 0;
