@@ -9,16 +9,15 @@ import { Main } from './Main';
 
 export const Container = () => {
     const { token } = useSelector(store => store)
+    
     return (
         <Wrapper>
             <Routes>
-                {token ? (
                     <Route path='/' element={
                         <PrivateRoute>
                             <Main />
                         </PrivateRoute>
                     } />
-                ) : ("")}
                 <Route path='signin' element={<Signin />} />
                 <Route path='signup' element={<Signup />} />
             </Routes>

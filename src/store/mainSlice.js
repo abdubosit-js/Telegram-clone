@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchMessages, signin, signup } from "./actions";
+import { fetchMessages, messages, signin, signup } from "./actions";
 
 const initialState = {
-    messages: [],
+    message: [],
     auth: Boolean(localStorage.getItem('token')),
     username: localStorage.getItem("username"),
     token: localStorage.getItem('token')
@@ -11,10 +11,14 @@ const initialState = {
 export const mainSlice = createSlice({
     name: "main",
     initialState,
-    reducers: {},
+    reducers: {
+        logout: (state, action) => {
+            localStorage.removeItem("token")
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchMessages.fulfilled, (state, actions) => {
-            state.messages = actions.payload
+            state.message = actions.payload
         });
 
         builder.addCase(signup.fulfilled, (state, action) => {
@@ -29,7 +33,13 @@ export const mainSlice = createSlice({
             localStorage.setItem("token", action.payload.token)
             localStorage.setItem("username", action.payload.username)
         })
+
+        builder.addCase(messages.fulfilled, (state, action) => {
+            
+        })
     }
 })
+
+export const { logout } = mainSlice.actions
 
 export default mainSlice.reducer

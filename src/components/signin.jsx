@@ -1,6 +1,6 @@
 import { Button, TextField } from '@mui/material'
-import React, { useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { signin } from '../store/actions'
@@ -10,6 +10,11 @@ export const Signin = () => {
     const passwordRef = useRef()
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const { auth } = useSelector(store => store)
+
+    useEffect(() => {
+        if (auth) navigate("/signin");
+    }, [navigate, auth])
 
     function signinHandler() {
         const data = {
@@ -17,9 +22,7 @@ export const Signin = () => {
             password: passwordRef.current.value
         } 
         
-        dispatch(signin(data)).then(res => {
-            navigate("/")
-        })
+        dispatch(signin(data)).then(() => navigate("/"))
     }
     return (
         <Wrapper>

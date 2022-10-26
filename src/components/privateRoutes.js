@@ -5,7 +5,7 @@ import React from 'react'
 
 const PrivateRoute = ({children}) => {
     const { auth } = useSelector(store => store)
-
+    
     if (!auth) {
         return <Navigate to='/signin' />
     }
