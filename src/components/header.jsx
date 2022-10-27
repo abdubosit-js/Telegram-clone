@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { ReactComponent as Menu } from '../assets/menu.svg'
 import { logout } from '../store/mainSlice'
 
-export const Header = () => {
+export const Header = ({chatActive, isActive}) => {
     const [active, setActive] = useState(false)
     const dispatch = useDispatch()
     const { message } = useSelector(store => store)
@@ -18,21 +18,25 @@ export const Header = () => {
                         A
                     </div>
                 </div>
-                <a href='' onClick={() => dispatch(logout())} className="signup_cnt">
-                    <a href='' onClick={() => dispatch(logout())}>logout</a>
+                <a href='/signin' onClick={() => dispatch(logout())} className="signup_cnt">
+                    <a href='/signin'>logout</a>
                 </a>
             </MenuCnt>
+            
             {active ?
                 <Opasity onClick={() => setActive(false)}></Opasity>
             : ""}
-            <Wrapper>
+
+            <Wrapper isActive={isActive}>
                 <div className='menu-div'>
                     <Menu onClick={() => setActive(true)} className='menu-cnt'/>
                 </div>
+            
                 <div className="search-cnt">
                     <input type="text" placeholder='search' />
                 </div>
-                <div className='group_container'>
+            
+                <div className='group_container' onClick={() => chatActive(true)}>
                     <div className="line"></div>
                     <div className='chanel-group'>PDP G5</div>
                     <div className='title-container'>
@@ -54,12 +58,19 @@ const Wrapper = styled.div`
         width: 100%;
         height: 70px;
         display: flex;
+        align-items: center;
+        gap: 14px;
+        padding-left: 10px;
+        background-color: ${({isActive}) => isActive ? "#383442" : "transparent"};
+        border-radius: 5px;
+        transition: 0.3s;
         cursor: pointer;
         .line {
             width: 3px;
             border-radius: 2px;
             height: 30px;
-            background-color: #60CDFF;
+            transition: 0.3s;
+            background-color: ${({isActive}) => isActive ? "#60CDFF" : "transparent"};
             margin-left: -10px;
         }
         h2 {
@@ -69,11 +80,6 @@ const Wrapper = styled.div`
         p {
             color: gray;
         }
-        gap: 14px;
-        align-items: center;
-        background-color: #383442;
-        border-radius: 5px;
-        padding-left: 10px;
         .chanel-group {
             width: 60px;
             height: 60px;

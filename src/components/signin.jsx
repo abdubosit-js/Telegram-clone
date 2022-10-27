@@ -27,7 +27,7 @@ export const Signin = () => {
     return (
         <Wrapper>
             <div className="signin_wrapper">
-               <h1>Sign up</h1>
+               <h1>Sign in</h1>
                 <TextField id="standard-basic" inputRef={userNameRef} label="User Name" variant="standard" />
                 <TextField
                     id="standard-password-input"

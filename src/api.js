@@ -48,6 +48,20 @@ class Api {
             toast.error(err)
         }
     }
+
+    async deleted(id) {
+        try {
+            const config = {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            }
+            const deleted = await axios.delete(`messages/${id}`, config)
+            return deleted.data
+        } catch(err) {
+            toast.error(err)
+        }
+    }
 }
 
 export const api = new Api()

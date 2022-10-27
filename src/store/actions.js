@@ -16,3 +16,7 @@ export const signin = createAsyncThunk("main/signin",
 export const messages = createAsyncThunk("main/messages", 
     async (data) => await api.messages(data)
 )
+
+export const deleted = createAsyncThunk("main/deleted", 
+    async (id) => await api.deleted(id)
+)

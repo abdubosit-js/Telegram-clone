@@ -4,18 +4,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { ReactComponent as Attachment } from '../assets/attachment.svg'
 import { ReactComponent as Send } from '../assets/send.svg'
-import { fetchMessages, messages } from "../store/actions"
+import { deleted, fetchMessages, messages } from "../store/actions"
 
 export const Chat = () => {
-    const messageRef = useRef()
+    const messageRef = useRef(null)
     const dispatch = useDispatch()
     const [isActive, setIsActive] = useState(false)
     const { message } = useSelector(store => store)
     // const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16)
     // console.log(randomColor)
-    console.log(isActive)
     
     useEffect(() => {
+        messageRef.current && messageRef.current.scrollIntoView();
         const interval = setInterval(() => {
             dispatch(fetchMessages())
         }, 3000)
@@ -47,11 +47,12 @@ export const Chat = () => {
                         <div className="message" onContextMenu={() => setIsActive(true)}>
                             <p>{item.createdBy}</p>
                             <h4>{item.message}</h4>
-                            <h6>{ moment(item.createdDate).format("LT") }</h6>
+                            <h6>{moment(item.createdDate).format("LT")}</h6>
+                            {/* <div className='delete' onClick={() => dispatch(deleted(item._id))}>X</div> */}
                         </div>
-                        <div className='scrol'></div>
                     </div>
                 )}
+                <div className='scrol' ref={messageRef}></div>
             </div>
             <div className="chat_wrapper">
                 <div className='chat'>
@@ -215,6 +216,16 @@ const Wrapper = styled.div`
                 line-height: 14px;
                 text-align: right;
                 color: #A1AAB3;
+            }
+            .delete {
+                color: white;
+                background-color: red;
+                padding: 0 5px;
+                border-radius: 50%;
+                position: absolute;
+                left: 0px;
+                bottom: 0px;
+                cursor: pointer;
             }
         }
     }

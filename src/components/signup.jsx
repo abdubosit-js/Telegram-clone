@@ -19,10 +19,7 @@ export const Signup = () => {
             confirmPassword: passwordRef.current.value
         }
         
-        dispatch(signup(data)).then(res => {
-            
-            navigate("/signin")
-        })
+        dispatch(signup(data)).then(() => navigate("/signin"))
     }
     return (
        <Wrapper>
