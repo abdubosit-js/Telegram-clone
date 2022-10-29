@@ -6,7 +6,6 @@ const initialState = {
     auth: Boolean(localStorage.getItem('token')),
     username: localStorage.getItem("username"),
     token: localStorage.getItem('token'),
-    loader: false
 }
 
 export const mainSlice = createSlice({
@@ -21,7 +20,6 @@ export const mainSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchMessages.fulfilled, (state, actions) => {
             state.message = actions.payload
-            state.loader = true
         });
 
         builder.addCase(signup.fulfilled, (state, action) => {

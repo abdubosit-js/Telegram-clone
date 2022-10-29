@@ -7,20 +7,22 @@ import { ReactComponent as Send } from '../assets/send.svg'
 import { deleted, fetchMessages, messages } from "../store/actions"
 
 export const Chat = () => {
-    const messageRef = useRef(null)
+    const messageRef = useRef()
+    const divRef = useRef(null)
     const dispatch = useDispatch()
-    const [isActive, setIsActive] = useState(false)
+    const [loader, setLoader] = useState(false)
     const { message } = useSelector(store => store)
     // const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16)
-    // console.log(randomColor)
     
     useEffect(() => {
-        messageRef.current && messageRef.current.scrollIntoView();
+        setLoader(true)
         const interval = setInterval(() => {
             dispatch(fetchMessages())
+            setLoader(false)
         }, 3000)
         return () => clearInterval(interval);
     }, [])
+
 
     function messagesHandler() {
         dispatch(messages({message: messageRef.current.value}))
@@ -39,12 +41,15 @@ export const Chat = () => {
                 </div>
             </div>
             <div className="messages_container">
-                {message.map((item) => 
+                {loader ? 
+                    <h1>loading...</h1>  
+                 :
+                  message.map((item) => 
                     <div key={item._id} className="message_wrapper">
                         <div className="profile-cnt">
                             {item.createdBy[0]}
                         </div>
-                        <div className="message" onContextMenu={() => setIsActive(true)}>
+                        <div className="message">
                             <p>{item.createdBy}</p>
                             <h4>{item.message}</h4>
                             <h6>{moment(item.createdDate).format("LT")}</h6>
@@ -52,7 +57,7 @@ export const Chat = () => {
                         </div>
                     </div>
                 )}
-                <div className='scrol' ref={messageRef}></div>
+                <div className='scrol' ref={divRef}></div>
             </div>
             <div className="chat_wrapper">
                 <div className='chat'>
