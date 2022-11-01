@@ -11,6 +11,10 @@ export const Wrapper = styled.div`
         align-items: center;
         gap: 20px;
         padding: 0 30px;
+        .arrow-cnt {
+            cursor: pointer;
+            display: none;
+        }
         .group-image {
             width: 50px;
             height: 50px;
@@ -164,4 +168,13 @@ export const Wrapper = styled.div`
             }
         }
     }
+    @media (max-width: 700px) {
+        .top-group-name-cnt{
+
+            .arrow-cnt {
+                display: block;
+            }
+        }
+    }
+
 `

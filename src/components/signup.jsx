@@ -56,9 +56,10 @@ const Wrapper = styled.div`
     background-color: white;
     border-top: 1px solid transparent;
     .signup_wrapper {
-        max-width: 450px;
+        max-width: 480px;
         display: flex;
         gap: 15px;
+        padding: 20px;
         flex-direction: column;
         margin: 160px auto;
 

@@ -7,14 +7,15 @@ export const Main = () => {
     const [chatActive, setChatActive] = useState(false)
 
     return (
-        <Wrapper>
+        <Wrapper isActive={chatActive}>
             <div className="flex_container">
                 <Header 
                     chatActive={setChatActive}
                     isActive={chatActive}
                 />
                 {chatActive ? (
-                    <Chat />
+                    
+                    <Chat chatActive={setChatActive}/>
                 ) : (
                     <div className='selected-chat-text'>
                         <p>select a chat to start messaging</p>
@@ -44,6 +45,13 @@ const Wrapper = styled.div`
                 color: white;
                 border-radius: 15px;
                 padding-bottom: 8px;
+            }
+        }
+    }
+    @media (max-width: 700px) {
+        .flex_container {
+            .selected-chat-text{
+                display: none;
             }
         }
     }

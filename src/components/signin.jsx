@@ -22,7 +22,7 @@ export const Signin = () => {
             password: passwordRef.current.value
         } 
         
-        dispatch(signin(data)).then(() => navigate("/"))
+        dispatch(signin(data)).then((res) => Boolean(res.payload.token) ? navigate("/") : "")
     }
     return (
         <Wrapper>
@@ -51,7 +51,8 @@ const Wrapper = styled.div`
     background-color: white;
     border-top: 1px solid transparent;
     .signin_wrapper {
-        max-width: 450px;
+        max-width: 480px;
+        padding: 20px;
         display: flex;
         gap: 15px;
         flex-direction: column;

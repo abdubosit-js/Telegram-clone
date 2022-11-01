@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     height: 100vh;
     background-color: #141120;
     padding: 10px;
@@ -80,6 +81,11 @@ export const Wrapper = styled.div`
             }
         }
     }
+    @media (max-width: 700px) {
+        width: 100%;
+        max-width: 100%;
+        display: ${({isActive}) => isActive ? "none" : "block"};
+    }
 `
 
 export const MenuCnt = styled.div`
@@ -143,6 +149,7 @@ export const MenuCnt = styled.div`
         color: white;
         text-decoration: none;
     }
+    
 `
 
 export const Opasity = styled.div`
@@ -151,4 +158,5 @@ export const Opasity = styled.div`
     width: 100%;
     height: 100vh;
     background-color: #00000090;
+    
 `
